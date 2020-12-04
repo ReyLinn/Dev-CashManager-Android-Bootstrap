@@ -7,11 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
+import com.budiyev.android.codescanner.CodeScanner
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
+private const val CAMERA_REQUEST_CODE = 101
 class FirstFragment : Fragment() {
+
+    private lateinit var codeScanner: CodeScanner
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -23,7 +27,6 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         view.findViewById<Button>(R.id.button_first).setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
