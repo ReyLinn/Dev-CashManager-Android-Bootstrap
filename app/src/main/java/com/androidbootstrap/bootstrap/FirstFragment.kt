@@ -1,20 +1,19 @@
 package com.androidbootstrap.bootstrap
-
+import java.util.*
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.budiyev.android.codescanner.AutoFocusMode
-import com.budiyev.android.codescanner.CodeScanner
-import com.budiyev.android.codescanner.CodeScannerView
-import com.budiyev.android.codescanner.DecodeCallback
-import com.budiyev.android.codescanner.ErrorCallback
-import com.budiyev.android.codescanner.ScanMode
+import com.budiyev.android.codescanner.*
+import com.androidbootstrap.bootstrap.data.model.CartViewModel
+import com.androidbootstrap.bootstrap.data.model.LoggedInUser
+import java.lang.Error
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -23,6 +22,9 @@ class FirstFragment : Fragment() {
     private lateinit var codeScanner: CodeScanner
     private lateinit var scannerView: CodeScannerView
     private lateinit var textViewScanner: TextView
+    private lateinit var textViewCart: TextView
+    private lateinit var cart : CartViewModel
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -35,8 +37,18 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         scannerView = view.findViewById<CodeScannerView>(R.id.scanner_view)
         textViewScanner = view.findViewById<TextView>(R.id.textview_first)
+        textViewCart = view.findViewById<TextView>(R.id.textview_cart)
         codeScanner()
-        view.findViewById<Button>(R.id.button_first).setOnClickListener {
+        /*view.findViewById<Button>(R.id.button_add).setOnClickListener {
+            try {
+                val text = textViewScanner.text
+                cart.add(text as String)
+                textViewCart.text = cart.toString()
+            }catch (e: Error) {
+                System.err.println(e)
+            }
+        }*/
+        view.findViewById<Button>(R.id.button_cart).setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
@@ -64,6 +76,7 @@ class FirstFragment : Fragment() {
             decodeCallback = DecodeCallback {
                 activity.runOnUiThread() {
                     textViewScanner.text = it.text
+
                 }
             }
 
