@@ -1,26 +1,14 @@
 package com.androidbootstrap.bootstrap
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.androidbootstrap.bootstrap.data.model.CartViewModel
-import com.budiyev.android.codescanner.AutoFocusMode
-import com.budiyev.android.codescanner.CodeScanner
-import com.budiyev.android.codescanner.CodeScannerView
-import com.budiyev.android.codescanner.DecodeCallback
-import com.budiyev.android.codescanner.ErrorCallback
-import com.budiyev.android.codescanner.ScanMode
-import java.lang.Error
 
 private const val CAMERA_REQUEST_CODE = 101
 class MainActivity : AppCompatActivity() {
@@ -42,8 +30,14 @@ class MainActivity : AppCompatActivity() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        val intent = Intent(this, SettingActivity::class.java).apply {}
+
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_setting -> {
+                startActivity(intent)
+                /*setContentView(R.layout.setting)*/
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
