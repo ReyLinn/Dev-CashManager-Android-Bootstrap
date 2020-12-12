@@ -8,9 +8,9 @@ import android.nfc.NdefRecord
 import android.nfc.NfcAdapter
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 const val MIME_TEXT_PLAIN = "text/plain"
 
@@ -28,6 +28,8 @@ class ReceiverActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_receiver)
+/*        setSupportActionBar(findViewById(R.id.toolbar2))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)*/
 
         this.nfcAdapter = NfcAdapter.getDefaultAdapter(this)?.let { it }
 
@@ -52,6 +54,7 @@ class ReceiverActivity : AppCompatActivity() {
     }
 
     override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
         // also reading NFC message from here in case this activity is already started in order
         // not to start another instance of this activity
         receiveMessageFromDevice(intent)
@@ -76,7 +79,7 @@ class ReceiverActivity : AppCompatActivity() {
         if (NfcAdapter.ACTION_NDEF_DISCOVERED == action) {
             val parcelables = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
             with(parcelables) {
-                val inNdefMessage = this[0] as NdefMessage
+                val inNdefMessage = this?.get(0) as NdefMessage
                 val inNdefRecords = inNdefMessage.records
                 val ndefRecord_0 = inNdefRecords[0]
 
@@ -86,6 +89,10 @@ class ReceiverActivity : AppCompatActivity() {
         }
     }
 
+/*    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }*/
 
     // Foreground dispatch holds the highest priority for capturing NFC intents
     // then go activities with these intent filters:

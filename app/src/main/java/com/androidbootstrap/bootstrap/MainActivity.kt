@@ -31,17 +31,29 @@ class MainActivity : AppCompatActivity() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        val intent = Intent(this, SettingActivity::class.java).apply {}
-        val intent2 = Intent(this, LoginActivity::class.java).apply {}
+        val setting = Intent(this, SettingActivity::class.java).apply {}
+        val disconnect = Intent(this, LoginActivity::class.java).apply {}
+        val sender = Intent(this, SenderActivity::class.java).apply {}
+        val receiver = Intent(this, ReceiverActivity::class.java).apply {}
 
         return when (item.itemId) {
             R.id.action_disconnect -> {
-                startActivity(intent2)
+                startActivity(disconnect)
                 /*setContentView(R.layout.setting)*/
                 true
             }
             R.id.action_setting -> {
-                startActivity(intent)
+                startActivity(setting)
+                /*setContentView(R.layout.setting)*/
+                true
+            }
+            R.id.action_sender -> {
+                startActivity(sender)
+                /*setContentView(R.layout.setting)*/
+                true
+            }
+            R.id.action_receiver -> {
+                startActivity(receiver)
                 /*setContentView(R.layout.setting)*/
                 true
             }
@@ -50,8 +62,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpPermissions(){
-        val permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
-        if(permission != PackageManager.PERMISSION_GRANTED){
+        val permissionCamera = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+        val permissionInternet = ContextCompat.checkSelfPermission(this, android.Manifest.permission.INTERNET)
+        val permissionNfc = ContextCompat.checkSelfPermission(this, android.Manifest.permission.NFC)
+
+        if(permissionCamera != PackageManager.PERMISSION_GRANTED){
+            makeRequest()
+        }
+        if(permissionInternet != PackageManager.PERMISSION_GRANTED){
+            makeRequest()
+        }
+        if(permissionNfc != PackageManager.PERMISSION_GRANTED){
             makeRequest()
         }
     }

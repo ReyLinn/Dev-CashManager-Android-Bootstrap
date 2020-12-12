@@ -11,4 +11,10 @@
     <item
         android:id="@+id/action_disconnect"
         android:title="@string/action_disconnect" />
+    <item
+        android:id="@+id/action_sender"
+        android:title="@string/action_sender" />
+    <item
+        android:id="@+id/action_receiver"
+        android:title="@string/action_receiver" />
 </menu>
