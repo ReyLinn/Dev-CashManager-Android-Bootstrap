@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.androidbootstrap.bootstrap.ui.login.LoginActivity
 
 private const val CAMERA_REQUEST_CODE = 101
 class MainActivity : AppCompatActivity() {
@@ -31,8 +32,14 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         val intent = Intent(this, SettingActivity::class.java).apply {}
+        val intent2 = Intent(this, LoginActivity::class.java).apply {}
 
         return when (item.itemId) {
+            R.id.action_disconnect -> {
+                startActivity(intent2)
+                /*setContentView(R.layout.setting)*/
+                true
+            }
             R.id.action_setting -> {
                 startActivity(intent)
                 /*setContentView(R.layout.setting)*/

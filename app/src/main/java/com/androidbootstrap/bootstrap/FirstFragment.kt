@@ -8,12 +8,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.androidbootstrap.bootstrap.data.model.CartModel
 import com.budiyev.android.codescanner.*
-import com.androidbootstrap.bootstrap.data.model.CartViewModel
-import com.androidbootstrap.bootstrap.data.model.LoggedInUser
-import java.lang.Error
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -23,7 +20,7 @@ class FirstFragment : Fragment() {
     private lateinit var scannerView: CodeScannerView
     private lateinit var textViewScanner: TextView
     private lateinit var textViewCart: TextView
-    private lateinit var cart : CartViewModel
+    private lateinit var cart : CartModel
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
