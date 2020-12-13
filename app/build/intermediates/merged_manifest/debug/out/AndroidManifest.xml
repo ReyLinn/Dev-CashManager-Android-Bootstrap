@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.androidbootstrap.bootstrap"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="19"
+        android:targetSdkVersion="30" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- specify that the app supports NFC -->
+    <uses-permission android:name="android.permission.NFC" />
+
+    <uses-feature android:name="android.hardware.nfc" />
+
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:debuggable="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:testOnly="true"
+        android:theme="@style/Theme.Bootstrap" >
+        <activity
+            android:name="com.androidbootstrap.bootstrap.ui.login.LoginActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Bootstrap.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.androidbootstrap.bootstrap.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Bootstrap.NoActionBar" >
+        </activity>
+        <activity
+            android:name="com.androidbootstrap.bootstrap.SettingActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="com.androidbootstrap.bootstrap.MainActivity"
+            android:theme="@style/Theme.Bootstrap.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name="com.androidbootstrap.bootstrap.SenderActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- Pour que l'activité puisse recevoir des messages NDEF d'un autre appareil, nous spécifions un filtre d'intention dans le fichier AndroidManifest : -->
+
+        <activity android:name="com.androidbootstrap.bootstrap.ReceiverActivity" >
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
