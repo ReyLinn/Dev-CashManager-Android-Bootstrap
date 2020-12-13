@@ -52,7 +52,7 @@ class SecondFragment : Fragment() {
             }
             override fun onResponse(call: Call, response: Response) {
                 println(response.body()!!.string())
-
+                result = response.body()!!.string()
             }
         })
     }*/

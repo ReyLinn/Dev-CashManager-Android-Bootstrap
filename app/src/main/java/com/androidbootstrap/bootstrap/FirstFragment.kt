@@ -20,7 +20,7 @@ class FirstFragment : Fragment() {
     private lateinit var scannerView: CodeScannerView
     private lateinit var textViewScanner: TextView
     private lateinit var textViewCart: TextView
-    private lateinit var cart : CartModel
+    // private lateinit var cart : CartModel
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,

@@ -18,7 +18,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
-        setUpPermissions()
+        setUpPermissionsCamera()
+        setUpPermissionsInternet()
+        setUpPermissionsNFC()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -28,50 +30,52 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         val setting = Intent(this, SettingActivity::class.java).apply {}
         val disconnect = Intent(this, LoginActivity::class.java).apply {}
         val sender = Intent(this, SenderActivity::class.java).apply {}
-        val receiver = Intent(this, ReceiverActivity::class.java).apply {}
+        // val receiver = Intent(this, ReceiverActivity::class.java).apply {}
 
         return when (item.itemId) {
             R.id.action_disconnect -> {
                 startActivity(disconnect)
-                /*setContentView(R.layout.setting)*/
                 true
             }
             R.id.action_setting -> {
                 startActivity(setting)
-                /*setContentView(R.layout.setting)*/
                 true
             }
             R.id.action_sender -> {
                 startActivity(sender)
-                /*setContentView(R.layout.setting)*/
                 true
             }
-            R.id.action_receiver -> {
+/*            R.id.action_receiver -> {
                 startActivity(receiver)
-                /*setContentView(R.layout.setting)*/
                 true
-            }
+            }*/
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    private fun setUpPermissions(){
+    private fun setUpPermissionsCamera(){
         val permissionCamera = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
-        val permissionInternet = ContextCompat.checkSelfPermission(this, android.Manifest.permission.INTERNET)
-        val permissionNfc = ContextCompat.checkSelfPermission(this, android.Manifest.permission.NFC)
 
         if(permissionCamera != PackageManager.PERMISSION_GRANTED){
             makeRequest()
         }
+    }
+
+    private fun setUpPermissionsInternet(){
+        val permissionInternet = ContextCompat.checkSelfPermission(this, android.Manifest.permission.INTERNET)
+
         if(permissionInternet != PackageManager.PERMISSION_GRANTED){
             makeRequest()
         }
+    }
+
+    private fun setUpPermissionsNFC(){
+        val permissionNfc = ContextCompat.checkSelfPermission(this, android.Manifest.permission.NFC)
+
         if(permissionNfc != PackageManager.PERMISSION_GRANTED){
             makeRequest()
         }

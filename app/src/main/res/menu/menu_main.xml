@@ -14,7 +14,7 @@
     <item
         android:id="@+id/action_sender"
         android:title="@string/action_sender" />
-    <item
+<!--    <item
         android:id="@+id/action_receiver"
-        android:title="@string/action_receiver" />
+        android:title="@string/action_receiver" />-->
 </menu>
