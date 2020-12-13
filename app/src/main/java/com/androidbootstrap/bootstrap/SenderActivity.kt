@@ -19,6 +19,7 @@ class SenderActivity : AppCompatActivity(), OutcomingNfcManager.NfcActivity {
 
     private var nfcAdapter: NfcAdapter? = null
 
+    // vérifier si l'appareil prend en charge le NFC
     private val isNfcSupported: Boolean =
             this.nfcAdapter != null
 
@@ -32,11 +33,13 @@ class SenderActivity : AppCompatActivity(), OutcomingNfcManager.NfcActivity {
 
         this.nfcAdapter = NfcAdapter.getDefaultAdapter(this)?.let { it }
 
+        // Si Nfcsupported = null alors ça veut dire qu'il ne prend pas en charge le NFC, on affiche un message et on arrête l'activité
         if (!isNfcSupported) {
             Toast.makeText(this, "Nfc is not supported on this device", Toast.LENGTH_SHORT).show()
             finish()
         }
 
+        // On vérifie que le NFC est activé sur l'appareil, si ce n'est pas le cas on lui demande de l'activer
         if (!nfcAdapter?.isEnabled!!) {
             Toast.makeText(
                     this,
@@ -75,9 +78,7 @@ class SenderActivity : AppCompatActivity(), OutcomingNfcManager.NfcActivity {
 
 
     override fun signalResult() {
-        // this will be triggered when NFC message is sent to a device.
-        // should be triggered on UI thread. We specify it explicitly
-        // cause onNdefPushComplete is called from the Binder thread
+        // Après avoir effectué les contrôles NFC préliminaires, dans la même méthode onCreate(), définissons le OutcomingNfcManager comme un callback qui gérera la création d'un message que nous voulons pousser vers un autre appareil :
         runOnUiThread {
             Toast.makeText(this, R.string.message_beaming_complete, Toast.LENGTH_SHORT).show()
         }

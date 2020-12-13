@@ -49,6 +49,7 @@ class ReceiverActivity : AppCompatActivity() {
         initViews()
     }
 
+    // onNewIntent() sera appelé chaque fois que ReceiverActivity est lancé avec une certaine intention. C'est le cas pour la réception d'un nouveau message et le remplacement du précédent si ReceiverActivity est déjà lancé. Nous vérifions ici l'intention avec laquelle l'activité a été lancée :
     private fun initViews() {
         this.tvIncomingMessage = findViewById(R.id.tv_in_message)
     }
@@ -60,6 +61,7 @@ class ReceiverActivity : AppCompatActivity() {
         receiveMessageFromDevice(intent)
     }
 
+    // Nous construisons et configurons une intention avec des filtres que nous voulons traiter lorsque l'application est au premier plan et nous définissons le type MIME des données que nous attendons.
     override fun onResume() {
         super.onResume()
 
@@ -94,18 +96,10 @@ class ReceiverActivity : AppCompatActivity() {
         return true
     }*/
 
-    // Foreground dispatch holds the highest priority for capturing NFC intents
-    // then go activities with these intent filters:
-    // 1) ACTION_NDEF_DISCOVERED
-    // 2) ACTION_TECH_DISCOVERED
-    // 3) ACTION_TAG_DISCOVERED
 
-    // always try to match the one with the highest priority, cause ACTION_TAG_DISCOVERED is the most
-    // general case and might be intercepted by some other apps installed on your device as well
-
-    // When several apps can match the same intent Android OS will bring up an app chooser dialog
-    // which is undesirable, because user will most likely have to move his device from the tag or another
-    // NFC device thus breaking a connection, as it's a short range
+    //Nous devons extraire l'action de l'intention et nous attendre à ce qu'elle soit ACTION_NDEF_DISCOVERED.
+    //Si c'est vraiment le cas, nous procédons à l'analyse et à l'affichage du message à l'utilisateur.
+    //Nous enregistrons également l'activité pour ce que l'on appelle la répartition en avant-plan. Ceci est fait pour donner à l'application la plus haute priorité pour les messages NDEF entrants, de sorte qu'aucune autre application filtrant ACTION_NDEF_DISCOVERED sur l'appareil ne puisse intercepter le message que nous poussons :
 
     private fun enableForegroundDispatch(activity: AppCompatActivity, adapter: NfcAdapter?) {
 

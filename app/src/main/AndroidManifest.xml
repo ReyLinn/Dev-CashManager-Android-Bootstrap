@@ -3,9 +3,10 @@
     package="com.androidbootstrap.bootstrap">
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--specify that the app supports NFC-->
     <uses-permission android:name="android.permission.NFC"/>
 
-    <uses-feature android:name="android.hardware.nfc" />
+    <uses-feature android:name="android.hardware.nfc"/>
 
     <application
         android:allowBackup="true"
@@ -52,6 +53,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <!--Pour que l'activité puisse recevoir des messages NDEF d'un autre appareil, nous spécifions un filtre d'intention dans le fichier AndroidManifest :-->
 
         <activity android:name=".ReceiverActivity">
             <intent-filter>
@@ -59,6 +61,8 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <data android:mimeType="text/plain"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".ShoppingCartActivity">
         </activity>
     </application>
 
