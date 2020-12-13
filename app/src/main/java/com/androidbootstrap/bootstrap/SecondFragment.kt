@@ -18,30 +18,29 @@ import java.net.URL
 class SecondFragment : Fragment() {
 
     private lateinit var textView: TextView
-/*
-    private val client = OkHttpClient()
-    private var result: String = ""
-*/
+    //private val client = OkHttpClient()
+    //private var result: String = ""
+
 
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-       /* run("https://jsonplaceholder.typicode.com/todos/1")*/
         return inflater.inflate(R.layout.fragment_second, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //run("https://91.166.139.178:8443/User/GetProductPrice?productReference=00000001")
         textView = view.findViewById<TextView>(R.id.textView2)
-/*        textView.text = result*/
+        //textView.text = result
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
     }
 
-    /*private fun run(url: String) {
+/*    private fun run(url: String) {
         val request = Request.Builder()
                 .url(url)
                 .build()
@@ -56,5 +55,4 @@ class SecondFragment : Fragment() {
             }
         })
     }*/
-
 }
